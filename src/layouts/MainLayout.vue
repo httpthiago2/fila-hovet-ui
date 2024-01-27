@@ -1,15 +1,12 @@
 <template>
-  <q-layout view='hHh lpR lfr'>
+  <q-layout view='hHh lpR lfr' class="bg-grey-2">
 
     <q-header elevated class='bg-primary text-white'>
       <q-toolbar>
         <q-btn dense flat round icon='menu' @click='toggleLeftDrawer' />
 
         <q-toolbar-title>
-          <q-avatar>
-            <img src='https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg'>
-          </q-avatar>
-          Title
+          FILA<span class="text-light-green-13">HOVET</span>
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
@@ -62,10 +59,6 @@ const linksList: EssentialLinkProps[] = [
     title: 'Monitorar Fila',
     icon: 'help_outline',
     link: '/monitorar-fila'
-  },
-  {
-    routeName: 'login',
-    link: '/#/login',
   }
 ]
 
