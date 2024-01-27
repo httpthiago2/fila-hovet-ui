@@ -44,25 +44,28 @@ const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 
 const linksList: EssentialLinkProps[] = [
   {
-    title: 'Gerenciar Filas',
-    teste: '',
+    title: 'Gerenciar Fila',
     icon: 'description',
-    link: '/#/gerenciar-fila'
+    routeName: 'GerenciarFilas'
   },
   {
     title: 'Gerenciar Prontuários',
     icon: 'person',
-    link: '/#/gerenciar-prontuario'
+    link: '/gerenciar-prontuario'
   },
   {
     title: 'Gerenciar Sala',
     icon: 'fact_check',
-    link: '/#/gerenciar-sala'
+    link: '/gerenciar-sala'
   },
   {
     title: 'Monitorar Fila',
     icon: 'help_outline',
     link: '/monitorar-fila'
+  },
+  {
+    routeName: 'login',
+    link: '/#/login',
   }
 ]
 

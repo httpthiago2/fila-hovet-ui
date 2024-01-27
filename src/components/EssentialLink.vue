@@ -3,7 +3,7 @@
     clickable
     tag="a"
     target="_blank"
-    :href="link"
+    @click="router.push(routeName ? { name: routeName } : { path: link })"
   >
     <q-item-section
       v-if="icon"
@@ -20,12 +20,17 @@
 </template>
 
 <script setup lang="ts">
-export interface EssentialLinkProps {
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+export type EssentialLinkProps = {
   title: string;
   caption?: string;
-  link?: string;
+  routeName?: string;
   icon?: string;
-}
+} & { link: string } | { routeName: string }
+
 withDefaults(defineProps<EssentialLinkProps>(), {
   caption: '',
   link: '#',
