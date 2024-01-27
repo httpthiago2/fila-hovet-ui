@@ -1,24 +1,30 @@
 <template>
-  <q-layout view="hHh lpR fFf">
+  <q-layout view='hHh lpR lfr'>
 
-    <q-header bordered class="bg-primary text-white">
+    <q-header elevated class='bg-primary text-white'>
       <q-toolbar>
-        <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn dense flat round icon='menu' @click='toggleLeftDrawer' />
 
-        <q-toolbar-title> 
-          FilaHOVET
+        <q-toolbar-title>
+          <q-avatar>
+            <img src='https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg'>
+          </q-avatar>
+          Title
         </q-toolbar-title>
-
-        <q-btn dense flat round icon="menu" @click="toggleRightDrawer" />
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
-      <!-- drawer content -->
-    </q-drawer>
+    <q-drawer show-if-above v-model='leftDrawerOpen' side='left' bordered>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
+      <q-list>
+
+        <EssentialLink
+          v-for='link in linksList'
+          :key='link.title'
+          v-bind='link'
+        />
+      </q-list>
+
     </q-drawer>
 
     <q-page-container>
@@ -28,25 +34,36 @@
   </q-layout>
 </template>
 
-<script>
+<script setup lang="ts">
 import { ref } from 'vue'
+import EssentialLink from 'src/components/EssentialLink.vue'
+import { EssentialLinkProps } from 'src/components/EssentialLink.vue'
 
-export default {
-  setup () {
-    const leftDrawerOpen = ref(false)
-    const rightDrawerOpen = ref(false)
+const leftDrawerOpen = ref(false)
+const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 
-    return {
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      },
-
-      rightDrawerOpen,
-      toggleRightDrawer () {
-        rightDrawerOpen.value = !rightDrawerOpen.value
-      }
-    }
+const linksList: EssentialLinkProps[] = [
+  {
+    title: 'Gerenciar Filas',
+    teste: '',
+    icon: 'description',
+    link: '/#/gerenciar-fila'
+  },
+  {
+    title: 'Gerenciar Prontuários',
+    icon: 'person',
+    link: '/#/gerenciar-prontuario'
+  },
+  {
+    title: 'Gerenciar Sala',
+    icon: 'fact_check',
+    link: '/#/gerenciar-sala'
+  },
+  {
+    title: 'Monitorar Fila',
+    icon: 'help_outline',
+    link: '/monitorar-fila'
   }
-}
+]
+
 </script>
