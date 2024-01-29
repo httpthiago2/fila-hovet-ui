@@ -46,6 +46,16 @@ const linksList: EssentialLinkProps[] = [
     routeName: 'GerenciarFilas'
   },
   {
+    title: 'WS',
+    icon: 'description',
+    routeName: 'TesteWs'
+  },
+  {
+    title: 'Manipular WS',
+    icon: 'description',
+    routeName: 'ManipularWs'
+  },
+  {
     title: 'Gerenciar Prontuários',
     icon: 'person',
     link: '/gerenciar-prontuario'
@@ -59,7 +69,8 @@ const linksList: EssentialLinkProps[] = [
     title: 'Monitorar Fila',
     icon: 'help_outline',
     link: '/monitorar-fila'
-  }
+  },
+  
 ]
 
 </script>
