@@ -15,6 +15,16 @@ const routes: RouteRecordRaw[] = [
       { name: 'EditarFila', path: 'edit/:id', component: () => import('pages/Filas/FormFila.vue') },
     ],
   },
+  {
+    path: '/teste-ws',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ name: 'TesteWs', path: '', component: () => import('pages/WebSocket/TesteWebSocket.vue') }],
+  },
+  {
+    path: '/manipular-ws',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ name: 'ManipularWs', path: '', component: () => import('pages/WebSocket/ManipularWebSocket.vue') }],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
