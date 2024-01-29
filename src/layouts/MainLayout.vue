@@ -42,22 +42,22 @@ const toggleLeftDrawer = () => leftDrawerOpen.value = !leftDrawerOpen.value
 const linksList: EssentialLinkProps[] = [
   {
     title: 'Gerenciar Fila',
-    icon: 'description',
+    icon: 'fa-solid fa-dog',
     routeName: 'GerenciarFilas'
   },
   {
     title: 'Gerenciar Prontuários',
-    icon: 'person',
+    icon: 'fa-solid fa-file-medical',
     link: '/gerenciar-prontuario'
   },
   {
     title: 'Gerenciar Sala',
-    icon: 'fact_check',
+    icon: 'fa-solid fa-house-medical',
     link: '/gerenciar-sala'
   },
   {
     title: 'Monitorar Fila',
-    icon: 'help_outline',
+    icon: 'fa-solid fa-tv',
     link: '/monitorar-fila'
   }
 ]
