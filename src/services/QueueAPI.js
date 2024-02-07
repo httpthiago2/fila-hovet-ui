@@ -2,7 +2,7 @@ import { useCrudApi } from 'src/services/crudService'
 import { api } from "src/services/api";
 
 const RESOURCE = 'queue'
-export const useQueueApi = () =>  {
+export const useQueueApi = () => {
 
     const crudApi = useCrudApi(RESOURCE)
 

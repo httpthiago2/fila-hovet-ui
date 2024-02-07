@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 import WebSocketService from '../../service/webSocketService';
 const status = ref('nada ainda');
 const webSocketService = new WebSocketService();
@@ -14,6 +14,10 @@ const webSocketService = new WebSocketService();
 webSocketService.connectAndSubscribeToTopic('/topic/status', (message) => {
   status.value = message;
 });
+
+onBeforeUnmount(() => {
+  webSocketService.disconnect();
+})
 
 </script>
 

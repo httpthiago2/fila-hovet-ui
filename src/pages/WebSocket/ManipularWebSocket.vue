@@ -7,7 +7,7 @@
 </template>
   
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 import WebSocketService from '../../service/webSocketService';
 
 const newStatus = ref('');
@@ -17,6 +17,10 @@ const updateStatus = () => {
     webSocketService.sendMessageToTopic('/app/updateStatus', newStatus.value);
     newStatus.value = null;
 }
+
+onBeforeUnmount(() => {
+    webSocketService.disconnect();
+})
 </script>
   
 <style scoped>

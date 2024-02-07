@@ -9,20 +9,26 @@
       <q-card-section class="bg-white">
         <q-input class="q-mb-md" filled v-model="fila.name" label="Nome" />
 
-        <select-autocomplete class="q-mb-md" filled v-model="fila.room" :options="roomOptions" option-label="name" label="Sala" />
+        <select-autocomplete class="q-mb-md" filled v-model="fila.doctor" :options="doctorOptions" option-label="name"
+          label="Médico" />
 
-        <q-table title="Prontuários" :rows="fila.medicalRecords" />
+        <select-autocomplete class="q-mb-md" filled v-model="fila.room" :options="roomOptions" option-label="name"
+          label="Sala" />
+
+        <q-input class="q-mb-md" filled v-model="fila.code" label="Código da fila" />
+
+        <q-table v-if="action === 'Editar'" title="Prontuários" :rows="fila.medicalRecords" />
 
 
 
       </q-card-section>
 
       <q-card-section class="text-white row justify-between items-center">
-          <div class="col justify-center items-center">
+        <div class="col justify-center items-center">
 
-            <queue-status-toggle class="q-mb-md text-black" @toggle="onToggle" @init="onToggle" />
+          <queue-status-toggle class="q-mb-md text-black" @toggle="onToggle" @init="onToggle" />
 
-          </div>
+        </div>
 
 
 
@@ -34,14 +40,14 @@
 </template>
 
 <script setup lang="ts">
-import SelectAutocomplete from 'components/Inputs/SelectAutocomplete.vue'
 import QueueStatusToggle from 'components/Filas/QueueStatusToggle.vue'
-import { Fila, QueueStatus, Room } from 'components/models'
-import { onMounted, reactive } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import SelectAutocomplete from 'components/Inputs/SelectAutocomplete.vue'
+import { Fila, QueueStatus, Room, User } from 'components/models'
+import { useQuasar } from 'quasar'
 import { useQueueApi } from 'src/services/QueueAPI'
 import { useReadOnlyApi } from 'src/services/crudService'
-import { useQuasar } from 'quasar'
+import { onMounted, reactive } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 
 const route = useRoute()
@@ -49,19 +55,22 @@ const router = useRouter()
 const q = useQuasar()
 const queueApi = useQueueApi()
 const roomApi = useReadOnlyApi('room')
+const userApi = useReadOnlyApi('user')
 
 const action = route.name === 'NovaFila' ? 'Nova' : 'Editar'
 
 const fila: Fila = reactive({
   name: '',
   queueStatus: QueueStatus.OPEN,
+  doctor: { name: '' },
   room: { name: '' },
   medicalRecords: [],
-  userCode: ''
+  userCode: '',
+  code: ''
 })
 
 const roomOptions: Room[] = reactive([])
-
+const doctorOptions: User[] = reactive([])
 const badge = reactive({
   color: '',
   label: ''
@@ -74,6 +83,7 @@ const onToggle = (status: QueueStatus, color: string, label: string) => {
 }
 
 const onSubmit = async () => {
+  console.log(fila)
   try {
     if (action === 'Nova') await queueApi.create(fila)
     if (action === 'Editar') await queueApi.update(fila.id, fila)
@@ -86,12 +96,17 @@ const onSubmit = async () => {
 
 onMounted(async () => {
   try {
-    const { data } = await roomApi.findAll()
-    roomOptions.push(...data?.data)
+    const filas = (await roomApi.findAll()).data.data
+    console.log(filas)
+    roomOptions.push(...filas);
+
+    const medicos = (await userApi.findAll()).data.data;
+    console.log(medicos)
+    doctorOptions.push(...medicos);
 
     if (action === 'Editar') {
-        const { data } = await queueApi.findById(route.params.id)
-        Object.assign(fila, data?.data)
+      const { data } = await queueApi.findById(route.params.id)
+      Object.assign(fila, data?.data)
     }
 
   } catch (error: any) {

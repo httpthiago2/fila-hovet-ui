@@ -15,11 +15,7 @@
 
       <q-list>
 
-        <EssentialLink
-          v-for='link in linksList'
-          :key='link.title'
-          v-bind='link'
-        />
+        <EssentialLink v-for='link in linksList' :key='link.title' v-bind='link' />
       </q-list>
 
     </q-drawer>
@@ -45,32 +41,32 @@ const linksList: EssentialLinkProps[] = [
     icon: 'fa-solid fa-dog',
     routeName: 'GerenciarFilas'
   },
-  {
-    title: 'WS',
-    icon: 'description',
-    routeName: 'TesteWs'
-  },
-  {
-    title: 'Manipular WS',
-    icon: 'description',
-    routeName: 'ManipularWs'
-  },
+  // {
+  //   title: 'WS',
+  //   icon: 'description',
+  //   routeName: 'TesteWs'
+  // },
+  // {
+  //   title: 'Manipular WS',
+  //   icon: 'description',
+  //   routeName: 'ManipularWs'
+  // },
   {
     title: 'Gerenciar Prontuários',
     icon: 'fa-solid fa-file-medical',
-    link: '/gerenciar-prontuario'
+    routeName: 'GerenciarProntuario'
   },
-  {
-    title: 'Gerenciar Sala',
-    icon: 'fa-solid fa-house-medical',
-    link: '/gerenciar-sala'
-  },
+  // {
+  //   title: 'Gerenciar Sala',
+  //   icon: 'fa-solid fa-house-medical',
+  //   routeName: 'GerenciarSalas'
+  // },
   {
     title: 'Monitorar Fila',
     icon: 'fa-solid fa-tv',
     link: '/monitorar-fila'
   },
-  
+
 ]
 
 </script>

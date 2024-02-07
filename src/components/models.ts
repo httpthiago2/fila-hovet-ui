@@ -8,7 +8,7 @@ export interface Meta {
 }
 
 export enum QueueStatus { OPEN, CLOSED}
-export enum Species { FELINE, CANINE }
+export enum Species  { FELINE, CANINE }
 export enum Gender { MALE , FEMALE}
 
 export enum MedicalRecordStatus { ATTENDED, PENDING }
@@ -20,6 +20,14 @@ export interface Fila {
   room: Room;
   medicalRecords: MedicalRecord[];
   userCode: string;
+  code: string;
+  doctor: User;
+}
+
+export interface User {
+  id?: number;
+  name: string;
+  profileTypeEnum?: 'DOCTOR' | 'SECRETARY' | 'DIRECTOR'
 }
 
 
@@ -35,8 +43,9 @@ export interface MedicalRecord {
   weight: number;
   registerDate: string;
   complaint: string;
-  species: Species;
-  gender: Gender ;
+  species: 'FELINE' | 'CANINE' | null;
+  gender: 'MALE' | 'FEMALE' | null;
   attendanceOrder: number;
-  medicalRecordStatus: MedicalRecordStatus;
+  medicalRecordStatus: 'ATTENDED' | 'PENDING' | null;
+  queue: Fila;
 }
